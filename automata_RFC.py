@@ -40,19 +40,18 @@ class AFDValidorRFC:
         lista_rfc_encontrados = []
 
         for letra in texto:
-            # Usamos la función correspondiente al estado actual
+           
             funcion_estado = self.states[self.estado_actual]
             nuevo_estado = funcion_estado(letra)
 
-            if nuevo_estado:  # Si la transición es válida
-                self.rfc_actual += letra  # Añadir el carácter al RFC actual
+            if nuevo_estado:  
+                self.rfc_actual += letra  
                 self.estado_actual = nuevo_estado
             else:
-                # Si llegamos a un estado no válido, reiniciamos
+                
                 self.estado_actual = 'q0'
                 self.rfc_actual = ""
 
-            # Si llegamos al estado final 'q25'
             if self.estado_actual == 'q25':
                 lista_rfc_encontrados.append(self.rfc_actual)
                 self.rfc_actual = ""
